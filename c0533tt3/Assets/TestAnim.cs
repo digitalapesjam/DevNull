@@ -8,9 +8,10 @@ public class TestAnim : MonoBehaviour {
 
 	public float moveForce = 365f;
 	public float maxSpeed = 5f;
+	public float minSpeed = 1f;
 	public float jumpForce = 1000f;
 
-	public GameObject starredBackground;
+//	public GameObject starredBackground;
 
 	private Animator animator = null;
 
@@ -42,17 +43,22 @@ public class TestAnim : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		float h = Input.GetAxis ("Horizontal");
-		if (h * rigidbody2D.velocity.x < maxSpeed)
+		float h = Input.GetAxis ("Horizontal") * rigidbody2D.velocity.x;
+
+
+//		if (Mathf.Abs (h * rigidbody2D.velocity.x) < maxSpeed)
+		if (h < maxSpeed && h > minSpeed)
 						rigidbody2D.AddForce (Vector2.right * h * moveForce);
 
-		if (Mathf.Abs (rigidbody2D.velocity.x) > maxSpeed)
+		if (rigidbody2D.velocity.x > maxSpeed)
 						rigidbody2D.velocity = new Vector2 (Mathf.Sign (rigidbody2D.velocity.x) * maxSpeed, rigidbody2D.velocity.y);
+		else if (rigidbody2D.velocity.x < minSpeed)
+						rigidbody2D.velocity = new Vector2 (Mathf.Sign (rigidbody2D.velocity.x) * minSpeed, rigidbody2D.velocity.y);
 
 
-		float v = rigidbody2D.velocity.x;
-		Debug.Log ("velocity: " + v);
-		starredBackground.renderer.material.SetFloat ("_ParallaxSpeed", v);
+//		float v = rigidbody2D.velocity.x;
+//		Debug.Log ("velocity: " + v);
+//		starredBackground.renderer.material.SetFloat ("_ParallaxSpeed", v);
 
 		if (Input.GetButtonDown ("Jump") && grounded) {
 			animator.SetBool ("IsJumping", true);

@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (!grounded && Input.GetKey(KeyCode.UpArrow) && rigidbody2D.velocity.y > 0){
-			rigidbody2D.AddForce(new Vector2(0,jumpForce*0.01f));
+			rigidbody2D.AddForce(new Vector2(0,jumpForce*0.03f));
 		}
 	}
 

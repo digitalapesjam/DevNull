@@ -11,7 +11,7 @@ public class TestAnim : MonoBehaviour {
 	public float minSpeed = 1f;
 	public float jumpForce = 1000f;
 
-//	public GameObject starredBackground;
+	public GameObject starredBackground;
 
 	private Animator animator = null;
 
@@ -56,9 +56,9 @@ public class TestAnim : MonoBehaviour {
 						rigidbody2D.velocity = new Vector2 (Mathf.Sign (rigidbody2D.velocity.x) * minSpeed, rigidbody2D.velocity.y);
 
 
-//		float v = rigidbody2D.velocity.x;
-//		Debug.Log ("velocity: " + v);
-//		starredBackground.renderer.material.SetFloat ("_ParallaxSpeed", v);
+		float v = rigidbody2D.velocity.x*10;
+		float bgSpeed = starredBackground.renderer.material.GetFloat ("_ParallaxSpeed");
+		starredBackground.renderer.material.SetFloat ("_ParallaxSpeed", Mathf.Lerp(bgSpeed,v,Time.deltaTime/20));
 
 		if (Input.GetButtonDown ("Jump") && grounded) {
 			animator.SetBool ("IsJumping", true);

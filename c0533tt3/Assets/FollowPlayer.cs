@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[ExecuteInEditMode]
 public class FollowPlayer : MonoBehaviour {
 
 	public Vector3 offset;
@@ -13,6 +14,6 @@ public class FollowPlayer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.position = player.position + offset;
+		transform.position = new Vector3(player.position.x + offset.x,offset.y,player.position.z + offset.z);
 	}
 }

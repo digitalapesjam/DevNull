@@ -61,7 +61,7 @@ SubShader { // Unity chooses the subshader that fits the GPU best
          	 			tex2D(_Parallax1,float2(input.tex.x-_Time.x*_ParallaxSpeed/1.5,input.tex.y+-_Time.x*10))+
          	 			tex2D(_Parallax2,float2(input.tex.x-_Time.x*_ParallaxSpeed/2,input.tex.y+-_Time.x*10));	
          	 			
-	           	 if (input.tex.y-0.5 > sin(input.tex.x+_Time.x*_ParallaxSpeed)/10 + sin(input.tex.x*10+_Time.x*_ParallaxSpeed)/10)
+	           	 if (input.tex.y-0.5 > sin(input.tex.x-_Time.x*_ParallaxSpeed/5)/10 + sin(input.tex.x*10-_Time.x*_ParallaxSpeed/5)/10)
 	         	 	rvalue += float4(0.1,0.1,0.1,1);
          	 }else {
          	 	float timeOffset0 = input.tex.x-_Time.x*_ParallaxSpeed*3;

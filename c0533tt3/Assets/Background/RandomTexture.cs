@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[ExecuteInEditMode]
 public class RandomTexture : MonoBehaviour {
 	
 	public Color RainColor = new Color(0.5f,0.5f,1.0f);
@@ -16,38 +17,38 @@ public class RandomTexture : MonoBehaviour {
 			for (int j=0;j<height;j++)
 				map.SetPixel(i,j,transparent);
 
-		for (int i=0;i<width/4;i++)
+		for (int i=0;i<width/8;i++)
 			map.SetPixel((int)(Random.value*width),(int)(Random.value*height),RainColor);
 
 		map.Apply();
 
-		renderer.material.SetTexture("_Parallax0",map);
+		renderer.sharedMaterial.SetTexture("_Parallax0",map);
 
 		map = new Texture2D(width/2,height/2);
 		for (int i=0;i<width;i++)
 			for (int j=0;j<height;j++)
 				map.SetPixel(i,j,transparent);
 		
-		for (int i=0;i<width/6;i++)
+		for (int i=0;i<width/10;i++)
 			map.SetPixel((int)(Random.value*width),(int)(Random.value*height),RainColor*0.8f);
 		
 		map.Apply();
 
-		renderer.material.SetTexture("_Parallax1",map);
+		renderer.sharedMaterial.SetTexture("_Parallax1",map);
 
 		map = new Texture2D(width,height);
 		for (int i=0;i<width;i++)
 			for (int j=0;j<height;j++)
 				map.SetPixel(i,j,transparent);
 		
-		for (int i=0;i<width/2;i++)
+		for (int i=0;i<width/4;i++)
 			map.SetPixel((int)(Random.value*width),(int)(Random.value*height),RainColor*0.8f);
 		
 		map.Apply();
 		
-		renderer.material.SetTexture("_Parallax2",map);
+		renderer.sharedMaterial.SetTexture("_Parallax2",map);
 
-		transform.localScale = new Vector3(1.1f * ((float)width)/height,1,1);
+		transform.localScale = new Vector3(1.01f * ((float)width)/height,1,1);
 	}
 	
 	// Update is called once per frame

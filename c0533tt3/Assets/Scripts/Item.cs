@@ -4,25 +4,24 @@ using System.Collections;
 public class Item : MonoBehaviour {
 
 	public bool IsEnemy;
-	public GameObject player;
+	public GameObject Player;
 
 	// Use this for initialization
 	void Start () {
-		Debug.Log ("Item behaviour started - isEnemy? " + IsEnemy + " - player tag: " + player.tag);
+		Debug.Log ("Item behaviour started - isEnemy? " + IsEnemy + " - player tag: " + Player.tag);
 	}
 
 	void OnCollisionEnter2D(Collision2D collider) {
-		Debug.Log ("Entered in a collision " + collider.gameObject.tag);
-		if (collider.gameObject == player) {
+		if (collider.gameObject == Player) {
 			// Player hit
-			Debug.Log ("Player HIT!");
 			Destroy (this.gameObject);
 
 			if (IsEnemy) {
 				// somehow decrease the player life
-				player.GetComponent<Animator> ().SetTrigger("HurtTrigger");
+				Player.GetComponent<PlayerController> ().OnHurt(this);
+				Player.GetComponent<Animator> ().SetTrigger("HurtTrigger");
 			} else {
-				player.GetComponent<Animator> ().SetTrigger("DrinkTrigger");
+				Player.GetComponent<Animator> ().SetTrigger("DrinkTrigger");
 			}
 		}
 	}

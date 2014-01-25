@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
 	public LayerMask groundMask;
 	public float jumpForce = 300f;
 
+	private int hurtingAnimFrames = -1;
 	Animator animator;
 
 	// Use this for initialization
@@ -19,6 +20,12 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
+		if(hurtingAnimFrames >= 0) {
+			if (hurtingAnimFrames == 10)
+				rigidbody2D.AddForce(new Vector2(-jumpForce, 0f));
+			hurtingAnimFrames -= 1;
+			return;
+		}
 		grounded = Physics2D.OverlapCircle(groundCheck.position,groundRadius,groundMask);
 		animator.SetBool("IsGrounded",grounded);
 		animator.SetFloat("VerticalSpeed",rigidbody2D.velocity.y);
@@ -28,12 +35,13 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Update() {
-//		if(grounded && Input.GetButtonDown("Fire1")) {
-//			animator.SetTrigger("DrinkTrigger");
-//		}
 		if(grounded && Input.GetKeyDown(KeyCode.Space)){
 			animator.SetBool("IsGrounded",false);
 			rigidbody2D.AddForce(new Vector2(0,jumpForce));
 		}
+	}
+
+	public void OnHurt(Item item) {
+		hurtingAnimFrames = 10;
 	}
 }

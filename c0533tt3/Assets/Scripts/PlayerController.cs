@@ -28,6 +28,9 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Update() {
+//		if(grounded && Input.GetButtonDown("Fire1")) {
+//			animator.SetTrigger("DrinkTrigger");
+//		}
 		if(grounded && Input.GetKeyDown(KeyCode.Space)){
 			animator.SetBool("IsGrounded",false);
 			rigidbody2D.AddForce(new Vector2(0,jumpForce));

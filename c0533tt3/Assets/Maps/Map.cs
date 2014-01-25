@@ -5,12 +5,18 @@ public class Map : MonoBehaviour {
 
 	public Sprite city;
 	public Sprite groundBlock;
+
+	public Sprite[] solidElements;
+	public Sprite[] softElements;
+
 	public float LevelLength = 100;
 	public float cityDistance = 0.8f;
 
 	private GameObject farCity;
 	private GameObject floor;
-	private float prevCameraX = 0;
+	private GameObject solidElementsPlaced;
+	private Vector3 prevCameraPos;
+	
 
 	// Use this for initialization
 	void Start () {
@@ -32,20 +38,41 @@ public class Map : MonoBehaviour {
 			GameObject g = new GameObject("city"+i);
 			g.AddComponent<SpriteRenderer>();
 			g.GetComponent<SpriteRenderer>().sprite = city;
-			g.AddComponent<PolygonCollider2D>();
 			g.GetComponent<SpriteRenderer>().sortingOrder = -1;
 			g.transform.position = new Vector3(i*city.bounds.size.x-10,-0.5f,0);
 			g.transform.parent = farCity.transform;
 		}
 
-		prevCameraX = Camera.main.transform.position.x;
+		float lastElementPos = -10;
+		solidElementsPlaced = new GameObject("solidElements");
+		for (int i=0;i<LevelLength/5;i++){
+
+			Sprite s = solidElements[Mathf.FloorToInt(Random.Range(0,solidElements.Length))];
+
+			GameObject g = new GameObject("solid"+i);
+			g.transform.position = new Vector3(lastElementPos+1+Random.Range(0,3),-2.6f,0);
+			g.AddComponent<SpriteRenderer>();
+			g.GetComponent<SpriteRenderer>().sprite = s;
+			g.AddComponent<BoxCollider2D>();
+			g.GetComponent<SpriteRenderer>().sortingOrder = 0;
+
+
+			if (s.name == "floatingPlatform")
+				g.transform.Translate(0,1+Random.value,0);
+
+			lastElementPos = g.transform.position.x + s.bounds.size.x;
+			g.transform.parent = solidElementsPlaced.transform;
+
+		}
+
+		prevCameraPos = Camera.main.transform.position;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		float cameraOffset = Camera.main.transform.position.x-prevCameraX;
-		prevCameraX = Camera.main.transform.position.x;
+		Vector3 cameraOffset = Camera.main.transform.position-prevCameraPos;
+		prevCameraPos = Camera.main.transform.position;
 
-		farCity.transform.Translate(cameraOffset*cityDistance,0,0);
+		farCity.transform.position = Vector3.Lerp(farCity.transform.position,farCity.transform.position + cameraOffset*0.9f,Time.deltaTime*20);
 	}
 }

@@ -1,12 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[ExecuteInEditMode]
-public class FollowPlayer : MonoBehaviour {
+public class CameraFollow : MonoBehaviour {
 
-	public Vector3 offset;
-
-	public Transform player;
+	public float offset;
 
 //	void Awake () {
 //		player = GameObject.FindGameObjectWithTag ("Player").transform;	
@@ -14,6 +11,6 @@ public class FollowPlayer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.position = new Vector3(player.position.x + offset.x,offset.y,player.position.z + offset.z);
+		Camera.main.transform.position = new Vector3(transform.position.x + offset,Camera.main.transform.position.y,Camera.main.transform.position.z);
 	}
 }

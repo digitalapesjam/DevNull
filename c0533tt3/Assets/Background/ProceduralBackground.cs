@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[ExecuteInEditMode]
 public class ProceduralBackground : MonoBehaviour {
 	
 	public Color RainColor = new Color(0.5f,0.5f,1.0f);

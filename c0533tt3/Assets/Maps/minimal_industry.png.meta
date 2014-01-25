@@ -48,8 +48,8 @@ TextureImporter:
         y: 480
         width: 155
         height: 95
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 6
+      pivot: {x: 0, y: 0}
     - name: smallTank
       rect:
         serializedVersion: 2
@@ -57,17 +57,17 @@ TextureImporter:
         y: 578
         width: 76
         height: 61
-      alignment: 0
-      pivot: {x: .5, y: .5}
-    - name: tallkTank
+      alignment: 6
+      pivot: {x: 0, y: 0}
+    - name: tallTank
       rect:
         serializedVersion: 2
         x: 1
         y: 496
         width: 31
         height: 144
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 6
+      pivot: {x: 0, y: 0}
     - name: fence0
       rect:
         serializedVersion: 2
@@ -75,8 +75,8 @@ TextureImporter:
         y: 208
         width: 64
         height: 56
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 6
+      pivot: {x: 0, y: 0}
     - name: fence1
       rect:
         serializedVersion: 2
@@ -84,8 +84,8 @@ TextureImporter:
         y: 144
         width: 82
         height: 56
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 6
+      pivot: {x: 0, y: 0}
     - name: smallFence
       rect:
         serializedVersion: 2
@@ -93,8 +93,8 @@ TextureImporter:
         y: 336
         width: 79
         height: 16
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 6
+      pivot: {x: 0, y: 0}
     - name: groundBlock
       rect:
         serializedVersion: 2
@@ -111,7 +111,7 @@ TextureImporter:
         y: 216
         width: 64
         height: 7
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 6
+      pivot: {x: 0, y: 0}
   spritePackingTag: 
   userData: 

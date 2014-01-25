@@ -47,11 +47,11 @@ public class RandomTexture : MonoBehaviour {
 		
 		renderer.material.SetTexture("_Parallax2",map);
 
-		transform.localScale = new Vector3(((float)width)/height,1,1);
+		transform.localScale = new Vector3(1.1f * ((float)width)/height,1,1);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		transform.position = Camera.main.transform.position + Vector3.forward*8;
+		transform.position = Camera.main.transform.position + Vector3.forward*8.1f;
 	}
 }

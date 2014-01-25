@@ -5,11 +5,11 @@ public class FollowPlayer : MonoBehaviour {
 
 	public Vector3 offset;
 
-	private Transform player;
+	public Transform player;
 
-	void Awake () {
-		player = GameObject.FindGameObjectWithTag ("Player").transform;	
-	}
+//	void Awake () {
+//		player = GameObject.FindGameObjectWithTag ("Player").transform;	
+//	}
 	
 	// Update is called once per frame
 	void Update () {

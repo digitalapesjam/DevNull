@@ -10,6 +10,8 @@ public class TestAnim : MonoBehaviour {
 	public float maxSpeed = 5f;
 	public float jumpForce = 1000f;
 
+	public GameObject starredBackground;
+
 	private Animator animator = null;
 
 	private bool grounded;
@@ -27,8 +29,6 @@ public class TestAnim : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D collision)
 	{
-		Debug.Log ("CollisionEnter");
-		Debug.Log (collision.collider.CompareTag ("Ground"));
 		if (collision.collider.CompareTag ("Ground"))
 						grounded = true;
 
@@ -36,8 +36,6 @@ public class TestAnim : MonoBehaviour {
 
 	void OnCollisionExit2D(Collision2D collision)
 	{
-		Debug.Log ("CollisionExit");
-		Debug.Log (collision.collider.CompareTag ("Ground"));
 		if (collision.collider.CompareTag ("Ground"))
 						grounded = false;
 	}
@@ -52,16 +50,16 @@ public class TestAnim : MonoBehaviour {
 						rigidbody2D.velocity = new Vector2 (Mathf.Sign (rigidbody2D.velocity.x) * maxSpeed, rigidbody2D.velocity.y);
 
 
+		float v = rigidbody2D.velocity.x;
+		Debug.Log ("velocity: " + v);
+		starredBackground.renderer.material.SetFloat ("_ParallaxSpeed", v);
+
 		if (Input.GetButtonDown ("Jump") && grounded) {
-			Debug.Log("jumping");
-			Debug.Log(Time.time);
 			animator.SetBool ("IsJumping", true);
 			lastTimeJump = Time.time;
 			jump = true;
 		}
 		else if (animator.GetBool("IsJumping") && grounded && ((Time.time - lastTimeJump) > lastTimeJumpDelta)) {
-			Debug.Log ("jump ended");
-			Debug.Log(Time.time);
 			animator.SetBool ("IsJumping", false);
 		}
 //		if (Input.GetButtonDown ("Jump"))

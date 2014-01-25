@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour {
 	public float MaxSpeed=5;
 	public float MinSpeed=1;
 	bool grounded=false;
+	bool isJumping=false;
 	public Transform groundCheck;
 	float groundRadius = 0.2f;
 	public LayerMask groundMask;
@@ -27,10 +28,11 @@ public class PlayerController : MonoBehaviour {
 		rigidbody2D.velocity = new Vector2(speed,rigidbody2D.velocity.y);
 	}
 
+	float lastJumpTime = 0;
 	void Update() {
-		if(grounded && Input.GetKeyDown(KeyCode.Space)){
+		   if(grounded && Input.GetKeyDown(KeyCode.UpArrow)){
 			animator.SetBool("IsGrounded",false);
-			rigidbody2D.AddForce(new Vector2(0,jumpForce));
+			rigidbody2D.AddForce(new Vector2(0,jumpForce*Mathf.Max(1,rigidbody2D.velocity.x/10f)));
 		}
 	}
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Map : MonoBehaviour {
 
-	public int numberOfItems;
+	public static int numberOfItems=20;
 	public GameObject player;
 	public Sprite city;
 	public Sprite groundBlock;

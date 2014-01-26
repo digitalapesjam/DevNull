@@ -14,8 +14,8 @@ public class PlayerController : MonoBehaviour {
 	private int hurtingAnimFrames = -1;
 	Animator animator;
 
-	public int points = 0;
-	public List<Sprite> collected = new List<Sprite>();
+	public static int points = 0;
+	public static List<Sprite> collected = new List<Sprite>();
 
 	FbPicturesHolder dataHolder;
 

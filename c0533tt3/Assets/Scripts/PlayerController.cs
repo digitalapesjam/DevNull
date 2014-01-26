@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour {
 
@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour {
 	Animator animator;
 
 	public int points = 0;
+	public List<Sprite> collected = new List<Sprite>();
 
 	FbPicturesHolder dataHolder;
 
@@ -54,6 +55,11 @@ public class PlayerController : MonoBehaviour {
 		points += item.ptModifier;
 		dataHolder.Lives += item.hpModifier;
 		Debug.Log ("item collision - new stats - pts: " + points + ", lifes: " + dataHolder.Lives);
+
+		if (item.ptModifier > 0) {
+			collected.Add (item.GetComponent<SpriteRenderer> ().sprite);
+		}
+
 		if (item.hpModifier < 0) {
 //			hurtingAnimFrames = 10;
 //			animator.SetTrigger("HurtTrigger");

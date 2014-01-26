@@ -157,7 +157,7 @@ public class Map : MonoBehaviour {
 		for (int i = 0; i < onBuildings; i ++) {
 			Vector2 pt = findPosition(buildingPoints, i, onBuildings); //buildingPoints[i % buildingPoints.Length];
 			Texture2D texture = textures[lastUsedId % textures.Length];
-			makeItem (itemsCreated, pt, texture, 0, 2);
+			makeItem (itemsCreated, pt, texture, 0, 1);
 			lastUsedId += 1;
 			itemsCreated += 1;
 		}

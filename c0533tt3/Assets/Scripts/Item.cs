@@ -8,7 +8,6 @@ public class Item : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Debug.Log ("Item behaviour started - isEnemy? " + IsEnemy + " - player tag: " + Player.tag);
 	}
 
 	void OnCollisionEnter2D(Collision2D collider) {

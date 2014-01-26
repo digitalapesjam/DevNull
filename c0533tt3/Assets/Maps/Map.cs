@@ -26,7 +26,7 @@ public class Map : MonoBehaviour {
 			GameObject g = new GameObject("block"+i);
 			g.AddComponent<SpriteRenderer>();
 			g.GetComponent<SpriteRenderer>().sprite = groundBlock;
-			g.AddComponent<PolygonCollider2D>();
+			g.AddComponent<BoxCollider2D>();
 			g.GetComponent<SpriteRenderer>().sortingOrder = 0;
 			g.transform.position = new Vector3(i*groundBlock.bounds.size.x-10,-3,0);
 			g.transform.parent = floor.transform;

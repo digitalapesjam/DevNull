@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Item : MonoBehaviour {
 
-	public bool IsEnemy;
+	public int hpModifier;
+	public int ptModifier;
 	public GameObject Player;
 
 	// Use this for initialization
@@ -14,14 +15,7 @@ public class Item : MonoBehaviour {
 		if (collider.gameObject == Player) {
 			// Player hit
 			Destroy (this.gameObject);
-
-			if (IsEnemy) {
-				// somehow decrease the player life
-				Player.GetComponent<PlayerController> ().OnHurt(this);
-				Player.GetComponent<Animator> ().SetTrigger("HurtTrigger");
-			} else {
-				Player.GetComponent<Animator> ().SetTrigger("DrinkTrigger");
-			}
+			Player.GetComponent<PlayerController> ().OnItemCollision(this);
 		}
 	}
 

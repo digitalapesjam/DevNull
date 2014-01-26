@@ -5,13 +5,14 @@ public class AddPhotos : MonoBehaviour {
 
 	private int index = 0;
 	// Use this for initialization
-	void Start () {
-	
+	void Awake () {
+		Texture2D[] textures = GameObject.FindObjectOfType<FbPicturesHolder> ().FbTextures;
+		FBPicsLoaded(textures);
 	}
 	
-	void FBPicsLoaded(List<Texture2D> textures) {
+	void FBPicsLoaded(Texture2D[] textures) {
 		Debug.Log ("Creating sprites");
-		textures.ForEach (texture => {
+		foreach (Texture2D texture in textures) {
 			Sprite s = Sprite.Create(texture,Rect.MinMaxRect(0,0,texture.width,texture.height),Vector2.one/2,texture.width);
 			GameObject g = new GameObject("profile_" + index);
 			g.AddComponent<SpriteRenderer>();
@@ -20,6 +21,6 @@ public class AddPhotos : MonoBehaviour {
 			g.AddComponent<PolygonCollider2D>();
 			g.GetComponent<Rigidbody2D>().fixedAngle = true;
 			g.GetComponent<SpriteRenderer>().sortingOrder = 1;
-		});
+		};
 	}
 }

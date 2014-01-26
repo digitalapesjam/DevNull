@@ -8,28 +8,30 @@ public class GetPhotos : MonoBehaviour {
 
 	public GameObject notifier;
 
-	public bool IsTest = false;
 	private int ImageCount = 30;
+	private bool isTest = false;
 
 	void Awake () {
 		photos = new List<Texture2D> ();
-		if (IsTest) {
+	}
+
+	public void FetchURLs()
+	{
+		if(Application.isWebPlayer) {
+			Application.ExternalEval (
+				@"
+console.log('sending urls to Unity', window.fbf_urls);
+u.getUnity().SendMessage('FBHandler', 'AddFriends', window.fbf_urls);
+");
+		} else {
 			ImageCount = 5;
+			isTest = true;
 			AddFriend ("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash1/t5/275330_609928551_792317627_q.jpg");
 			AddFriend ("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/273836_601768550_1429033367_q.jpg");
 			AddFriend ("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/48895_595715443_4117_q.jpg");
 			AddFriend ("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/t5/41657_583738753_8955_q.jpg");
 			AddFriend ("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash1/t5/371129_577322690_159507207_q.jpg");
 		}
-	}
-
-	void FetchURLs()
-	{
-		Application.ExternalEval (
-@"
-console.log('sending urls to Unity', window.fbf_urls);
-u.getUnity().SendMessage('FBHandler', 'AddFriends', window.fbf_urls);
-");
 	}
 
 	void ExternalLog (string o) {
@@ -52,6 +54,13 @@ u.getUnity().SendMessage('FBHandler', 'AddFriends', window.fbf_urls);
 			photos.Add (texture);
 			if (photos.Count == ImageCount) {
 				ExternalLog("FBPics Loaded!");
+				if(isTest) {
+					// add moaaaaar photos
+					int toAdd = 30 - photos.Count;
+					for(int i = 0; i < toAdd; i++) {
+						photos.Add (photos[i % 5]);
+					}
+				}
 				notifier.SendMessage("FBPicsLoaded", photos);
 
 			}

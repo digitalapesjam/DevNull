@@ -6,7 +6,7 @@ public class Map : MonoBehaviour {
 	public Sprite city;
 	public Sprite groundBlock;
 
-	public Sprite[] solidElements;
+	public Sprite[] largeSolidElements;
 	public Sprite[] softElements;
 
 	public float LevelLength = 100;
@@ -14,7 +14,7 @@ public class Map : MonoBehaviour {
 
 	private GameObject farCity;
 	private GameObject floor;
-	private GameObject solidElementsPlaced;
+	private GameObject largeSolidElementsPlaced;
 	private Vector3 prevCameraPos;
 	
 
@@ -39,18 +39,18 @@ public class Map : MonoBehaviour {
 			g.AddComponent<SpriteRenderer>();
 			g.GetComponent<SpriteRenderer>().sprite = city;
 			g.GetComponent<SpriteRenderer>().sortingOrder = -1;
-			g.transform.position = new Vector3(i*city.bounds.size.x-10,-0.5f,0);
+			g.transform.position = new Vector3(i*city.bounds.size.x-5,-0.5f,0);
 			g.transform.parent = farCity.transform;
 		}
 
-		float lastElementPos = -10;
-		solidElementsPlaced = new GameObject("solidElements");
-		for (int i=0;i<LevelLength/5;i++){
+		float lastElementPos = 0;
+		largeSolidElementsPlaced = new GameObject("solidElements");
+		for (int i=0;i<LevelLength/10;i++){
 
-			Sprite s = solidElements[Mathf.FloorToInt(Random.Range(0,solidElements.Length))];
+			Sprite s = largeSolidElements[Mathf.FloorToInt(Random.Range(0,largeSolidElements.Length))];
 
 			GameObject g = new GameObject("solid"+i);
-			g.transform.position = new Vector3(lastElementPos+1+Random.Range(0,3),-2.6f,0);
+			g.transform.position = new Vector3(lastElementPos+3+Random.Range(0,10),-2.6f,0);
 			g.AddComponent<SpriteRenderer>();
 			g.GetComponent<SpriteRenderer>().sprite = s;
 			g.AddComponent<BoxCollider2D>();
@@ -60,8 +60,8 @@ public class Map : MonoBehaviour {
 			if (s.name == "floatingPlatform")
 				g.transform.Translate(0,1+Random.value,0);
 
-			lastElementPos = g.transform.position.x + s.bounds.size.x;
-			g.transform.parent = solidElementsPlaced.transform;
+			lastElementPos = g.transform.position.x;
+			g.transform.parent = largeSolidElementsPlaced.transform;
 
 		}
 

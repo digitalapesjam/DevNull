@@ -37,11 +37,11 @@ public class PlayerController : MonoBehaviour {
 	void Update() {
 		 if(grounded && Input.GetKeyDown(KeyCode.UpArrow)){
 			animator.SetBool("IsGrounded",false);
-			rigidbody2D.AddForce(new Vector2(0,jumpForce*Mathf.Max(1,rigidbody2D.velocity.x/10f)));
+			rigidbody2D.AddForce(new Vector2(0,jumpForce*Mathf.Max(1,rigidbody2D.velocity.x/20f)));
 		}
 
 		if (!grounded && Input.GetKey(KeyCode.UpArrow) && rigidbody2D.velocity.y > 0){
-			rigidbody2D.AddForce(new Vector2(0,jumpForce*0.03f));
+			rigidbody2D.AddForce(new Vector2(0,jumpForce*0.05f));
 		}
 	}
 

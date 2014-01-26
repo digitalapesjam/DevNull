@@ -6,6 +6,8 @@ public class ProceduralBackground : MonoBehaviour {
 	public Color RainColor = new Color(0.5f,0.5f,1.0f);
 	public Rigidbody2D Player;
 
+	public float ParallaxSpeed = 10;
+
 	// Use this for initialization
 	void Start () {
 		int height = Screen.height;
@@ -59,8 +61,12 @@ public class ProceduralBackground : MonoBehaviour {
 		float scaleX = scaleZ * 1.01f * ((float)width)/height;
 		transform.localScale = new Vector3(scaleX,1,scaleZ);
 
+		if (Player != null) {
 		float horizontalSpeed = Player.velocity.x*2;
 		float currentRainSpeed = renderer.material.GetFloat("_ParallaxSpeed");
 		renderer.material.SetFloat("_ParallaxSpeed",Mathf.Lerp(currentRainSpeed,horizontalSpeed,Time.deltaTime/10));
+		}
+
+		renderer.material.SetFloat("_ParallaxSpeed",ParallaxSpeed);
 	}
 }

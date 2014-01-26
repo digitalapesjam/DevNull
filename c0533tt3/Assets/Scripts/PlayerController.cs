@@ -45,7 +45,12 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	public void OnHurt(Item item) {
-		hurtingAnimFrames = 10;
+	public void OnItemCollision(Item item){
+		if (item.hpModifier < 0) {
+			hurtingAnimFrames = 10;
+			animator.SetTrigger("HurtTrigger");
+		} else if (item.hpModifier > 0) {
+			animator.SetTrigger("DrinkTrigger");
+		}
 	}
 }

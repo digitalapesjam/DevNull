@@ -32,16 +32,16 @@ public class PlayerController : MonoBehaviour {
 		float move = Input.GetAxis ("Horizontal");
 		float speed = 0.5f*(MaxSpeed+MinSpeed) + move*0.5f*(MaxSpeed-MinSpeed);
 		rigidbody2D.velocity = new Vector2(speed,rigidbody2D.velocity.y);
+
+		if (!grounded && Input.GetKey(KeyCode.Space) && rigidbody2D.velocity.y > 0){
+			rigidbody2D.AddForce(new Vector2(0,jumpForce*0.06f));
+		}
 	}
 
 	void Update() {
 		if(grounded && Input.GetKeyDown(KeyCode.Space)){
 			animator.SetBool("IsGrounded",false);
 			rigidbody2D.AddForce(new Vector2(0,jumpForce*Mathf.Max(1,rigidbody2D.velocity.x/20f)));
-		}
-
-		if (!grounded && Input.GetKey(KeyCode.Space) && rigidbody2D.velocity.y > 0){
-			rigidbody2D.AddForce(new Vector2(0,jumpForce*0.05f));
 		}
 	}
 

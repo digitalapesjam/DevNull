@@ -35,12 +35,12 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Update() {
-		 if(grounded && Input.GetKeyDown(KeyCode.UpArrow)){
+		if(grounded && Input.GetKeyDown(KeyCode.Space)){
 			animator.SetBool("IsGrounded",false);
 			rigidbody2D.AddForce(new Vector2(0,jumpForce*Mathf.Max(1,rigidbody2D.velocity.x/20f)));
 		}
 
-		if (!grounded && Input.GetKey(KeyCode.UpArrow) && rigidbody2D.velocity.y > 0){
+		if (!grounded && Input.GetKey(KeyCode.Space) && rigidbody2D.velocity.y > 0){
 			rigidbody2D.AddForce(new Vector2(0,jumpForce*0.05f));
 		}
 	}

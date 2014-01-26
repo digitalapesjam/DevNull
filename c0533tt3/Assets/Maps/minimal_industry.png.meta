@@ -128,8 +128,17 @@ TextureImporter:
         x: 31
         y: 400
         width: 64
-        height: 176
+        height: 175
       alignment: 6
       pivot: {x: 0, y: 0}
+    - name: Gate
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 12
+        width: 60
+        height: 50
+      alignment: 7
+      pivot: {x: .5, y: 0}
   spritePackingTag: 
   userData: 

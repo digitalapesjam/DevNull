@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>Unity Web Player | c0533tt3</title>
+		<title>/dev/null - a game by Paolo Burelli and Francesco Zanitti</title>
 		<script type='text/javascript' src='https://ssl-webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/jquery.min.js'></script>
 		<script type="text/javascript">
 		<!--
@@ -56,7 +56,7 @@
 						break;
 					}
 				});
-				u.initPlugin(jQuery("#unityPlayer")[0], "fbtest.unity3d");
+				// u.initPlugin(jQuery("#unityPlayer")[0], "fbtest.unity3d");
 			});
 		-->
 		</script>
@@ -64,8 +64,8 @@
 		<!--
 		body {
 			font-family: Helvetica, Verdana, Arial, sans-serif;
-			background-color: white;
-			color: black;
+			background-color: #000;
+			color: #efefef;
 			text-align: center;
 		}
 		a:link, a:visited {
@@ -112,12 +112,15 @@
 			height: 600px;
 			width: 960px;
 		}
+		a#loginButton {
+			color: white;
+		}
 		-->
 		</style>
 	</head>
 	<body>
-		<a href="" onClick="return login();" id="loginButton">Login</a>
-		<p class="header"><span>Unity Web Player | </span>c0533tt3</p>
+		<p class="header">/dev/null</p>
+		<a href="" onClick="return login();" id="loginButton">Login to Facebook to play</a>
 		<div class="content">
 			<div id="unityPlayer">
 				<div class="missing">
@@ -132,7 +135,7 @@
 				</div>
 			</div>
 		</div>
-		<p class="footer">&laquo; created with <a href="http://unity3d.com/unity/" title="Go to unity3d.com">Unity</a> &raquo;</p>
+		<p>A Game by Paolo Burelli &amp; Francesco Zanitti</p>
 		<script type="text/javascript" src="fbconn.js"></script>
 	</body>
 </html>

@@ -5,7 +5,7 @@ public class ShowSaved: MonoBehaviour {
 
 	public GameObject score;
 
-	void Awake () {
+	void Start () {
 		foreach (Sprite sp in PlayerController.collected) {
 			GameObject g = new GameObject("saved_" + Random.value);
 			g.AddComponent<SpriteRenderer>();

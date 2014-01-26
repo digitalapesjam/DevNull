@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour {
 
 		if (item.ptModifier > 0) {
 			collected.Add (item.GetComponent<SpriteRenderer> ().sprite);
+			animator.SetTrigger("DrinkTrigger");
 		}
 
 		if (item.hpModifier < 0) {
@@ -70,7 +71,7 @@ public class PlayerController : MonoBehaviour {
 		if (dataHolder.Lives < 0) {
 			// player dead
 			Debug.Log ("Player dead");
-			Application.LoadLevel ("menu");
+			Application.LoadLevel ("GameOver");
 		}
 	}
 }

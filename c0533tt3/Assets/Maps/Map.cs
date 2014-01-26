@@ -38,7 +38,7 @@ public class Map : MonoBehaviour {
 		bottom.GetComponent<Item> ().Player = player;
 		bottom.GetComponent<Item> ().hpModifier = -1;
 		bottom.transform.position = new Vector3(0, -10, 0);
-		bottom.transform.localScale = new Vector2(groundBlock.bounds.size.x * numberOfBlocks, 2);
+		bottom.transform.localScale = new Vector2(groundBlock.bounds.size.x * numberOfBlocks * 3, 2);
 
 		List<Vector2> goodPointsGround = new List<Vector2> ();
 		List<Vector2> goodPointsBuildings = new List<Vector2> ();
@@ -112,6 +112,8 @@ public class Map : MonoBehaviour {
 		gate.AddComponent<BoxCollider2D>();
 		gate.GetComponent<BoxCollider2D>().isTrigger = true;
 		gate.GetComponent<BoxCollider2D>().size = new Vector2(0.2f,10);
+		gate.AddComponent<LevelComplete> ();
+		gate.GetComponent<LevelComplete> ().player = player;
 		gate.GetComponent<SpriteRenderer>().sortingOrder = 0;
 		gate.transform.localScale = new Vector3(1.5f,2,1);
 		gate.transform.position = new Vector3(LevelLength-15,-2.6f,0);
@@ -135,7 +137,7 @@ public class Map : MonoBehaviour {
 	}
 
 	Vector2 findPosition(Vector2[] pts, int idx, int total) {
-		return pts[(int)idx * pts.Length / total];
+		return pts[((int)idx * pts.Length / total) % pts.Length];
 		//return pts[idx % pts.Length];
 	}
 

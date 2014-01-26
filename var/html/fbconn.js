@@ -23,16 +23,18 @@ window.fbAsyncInit = function() {
 		if (response.status == 'connected') {
 			document.getElementById('loginButton').style.visibility = 'hidden';
 			FB.api('/me', function(response) {console.log(response);});
+
+			window.startUnity();
+			window.fbf = [];
+			console.log('Get friends');
+			window.getFBFriends(function(res){
+				window.fbf = res;
+				var urls = res.map(function(f){return f.picture.data.url;});
+				window.fbf_urls = urls.join(' ');
+			});
 		} else {
 			console.log('whatev..', response);
 		}
-		window.fbf = [];
-		console.log('Get friends');
-		window.getFBFriends(function(res){
-			window.fbf = res;
-			var urls = res.map(function(f){return f.picture.data.url;});
-			window.fbf_urls = urls.join(' ');
-		});
 	});
 };
 
@@ -42,6 +44,10 @@ window.getFBFriends = function(cb) {
 		if( !response.error ) {return cb(response.data);}
 		else {console.log('ups, some error occurred');}
     });
+};
+
+window.startUnity = function() {
+	u.initPlugin(jQuery("#unityPlayer")[0], "fbtest.unity3d");
 };
 
 (function(d){

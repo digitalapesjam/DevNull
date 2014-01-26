@@ -14,9 +14,14 @@ public class PlayerController : MonoBehaviour {
 	private int hurtingAnimFrames = -1;
 	Animator animator;
 
+	public int points = 0;
+
+	FbPicturesHolder dataHolder;
+
 	// Use this for initialization
 	void Start () {
 		animator = GetComponent<Animator>();
+		dataHolder = GameObject.FindObjectOfType<FbPicturesHolder> ();
 	}
 	
 	void FixedUpdate () {
@@ -46,11 +51,20 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void OnItemCollision(Item item){
+		points += item.ptModifier;
+		dataHolder.Lives += item.hpModifier;
+		Debug.Log ("item collision - new stats - pts: " + points + ", lifes: " + dataHolder.Lives);
 		if (item.hpModifier < 0) {
-			hurtingAnimFrames = 10;
-			animator.SetTrigger("HurtTrigger");
+//			hurtingAnimFrames = 10;
+//			animator.SetTrigger("HurtTrigger");
+			Application.LoadLevel (Application.loadedLevelName);
 		} else if (item.hpModifier > 0) {
 			animator.SetTrigger("DrinkTrigger");
+		}
+		if (dataHolder.Lives < 0) {
+			// player dead
+			Debug.Log ("Player dead");
+			Application.LoadLevel ("menu");
 		}
 	}
 }

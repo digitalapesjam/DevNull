@@ -15,22 +15,27 @@ public class MenuGUI : MonoBehaviour {
 		if(loading) {
 			GUI.Box(r, "<size=30>Loading...</size>");
 		} else {
-
-				if(GUI.Button(r, "<size=30>Play</size>")) {
-				Debug.Log("Loading Photos");
-				loading = true;
-				GetComponent<GetPhotos> ().FetchURLs();
+			if(GUI.Button(r, "<size=30>Play</size>")) {
+				if (dataHolder().FbTextures.Length > 0) {
+					// already loaded, reset lives and go
+					dataHolder().Lives = 2;
+					Application.LoadLevel("Main");
+				} else {
+					Debug.Log("Loading Photos");
+					loading = true;
+					GetComponent<GetPhotos> ().FetchURLs();
+				}
 			}
 		}
 	}
 
 	public void FBPicsLoaded (List<Texture2D> textures) {
-		GameObject.FindObjectOfType<FbPicturesHolder> ().FbTextures = textures.ToArray();
-		Application.LoadLevel("fbtest");
+		dataHolder().FbTextures = textures.ToArray();
+		Application.LoadLevel("Main");
 	}
 
-	// Update is called once per frame
-	void Update () {
-	
+	FbPicturesHolder dataHolder() {
+		return GameObject.FindObjectOfType<FbPicturesHolder> ();
 	}
+
 }

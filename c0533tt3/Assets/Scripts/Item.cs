@@ -7,6 +7,8 @@ public class Item : MonoBehaviour {
 	public int ptModifier;
 	public GameObject Player;
 
+	public bool destroyOnHit = true;
+
 	// Use this for initialization
 	void Start () {
 	}
@@ -14,7 +16,8 @@ public class Item : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D collider) {
 		if (collider.gameObject == Player) {
 			// Player hit
-			Destroy (this.gameObject);
+			if (destroyOnHit)
+				Destroy (this.gameObject);
 			Player.GetComponent<PlayerController> ().OnItemCollision(this);
 		}
 	}

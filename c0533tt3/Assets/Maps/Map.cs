@@ -35,10 +35,13 @@ public class Map : MonoBehaviour {
 		bottom.transform.parent = floor.transform;
 		bottom.AddComponent<BoxCollider2D> ();
 		bottom.AddComponent<Item> ();
+		bottom.GetComponent<Item> ().destroyOnHit = false;
 		bottom.GetComponent<Item> ().Player = player;
 		bottom.GetComponent<Item> ().hpModifier = -1;
-		bottom.transform.position = new Vector3(0, -10, 0);
-		bottom.transform.localScale = new Vector2(groundBlock.bounds.size.x * numberOfBlocks * 3, 2);
+		bottom.transform.position = new Vector3(0.0f, -3.5f, 0.0f);
+		bottom.transform.localScale = new Vector2(groundBlock.bounds.size.x * numberOfBlocks * 3, 1);
+
+		Debug.Log ("Made a bottom for the floor - y: " + bottom.transform.position.y + " - name: " + bottom.name);
 
 		List<Vector2> goodPointsGround = new List<Vector2> ();
 		List<Vector2> goodPointsBuildings = new List<Vector2> ();
@@ -85,7 +88,7 @@ public class Map : MonoBehaviour {
 
 			int offset = 4 + Mathf.FloorToInt(Random.Range(0,10));
 
-			g.transform.position = new Vector3(floor.transform.GetChild(lastElementPos+offset).position.x,-2.6f,0);
+			g.transform.position = new Vector3(floor.transform.GetChild(Mathf.Min (lastElementPos+offset, floor.transform.childCount) ).position.x,-2.6f,0);
 
 
 			g.AddComponent<SpriteRenderer>();

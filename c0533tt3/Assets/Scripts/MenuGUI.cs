@@ -18,7 +18,6 @@ public class MenuGUI : MonoBehaviour {
 			if(GUI.Button(r, "<size=30>Play</size>")) {
 				if (dataHolder().FbTextures.Length > 0) {
 					// already loaded, reset lives and go
-					dataHolder().Lives = 2;
 					Application.LoadLevel("Main");
 				} else {
 					Debug.Log("Loading Photos");

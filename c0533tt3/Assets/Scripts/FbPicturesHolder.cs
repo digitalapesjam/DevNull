@@ -4,7 +4,7 @@ using System.Collections;
 public class FbPicturesHolder : MonoBehaviour {
 
 	public Texture2D[] FbTextures;
-	public int Lives = 2;
+	public int Lifes = 2;
 
 	// Use this for initialization
 	void Start () {

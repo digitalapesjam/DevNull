@@ -11,24 +11,22 @@ public class PlayerController : MonoBehaviour {
 	public LayerMask groundMask;
 	public float jumpForce = 500f;
 
+	private int hurtingAnimFrameMax = 30;
 	private int hurtingAnimFrames = -1;
 	Animator animator;
 
 	public static int points = 0;
 	public static List<Sprite> collected = new List<Sprite>();
 
-	FbPicturesHolder dataHolder;
-
 	// Use this for initialization
 	void Start () {
 		animator = GetComponent<Animator>();
-		dataHolder = GameObject.FindObjectOfType<FbPicturesHolder> ();
 	}
 	
 	void FixedUpdate () {
 		if(hurtingAnimFrames >= 0) {
-			if (hurtingAnimFrames == 10)
-				rigidbody2D.AddForce(new Vector2(-jumpForce, 0f));
+			if (hurtingAnimFrames == hurtingAnimFrameMax)
+				rigidbody2D.AddForce(new Vector2(-jumpForce/2, jumpForce * 2));
 			hurtingAnimFrames -= 1;
 			return;
 		}
@@ -52,9 +50,10 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void OnItemCollision(Item item){
+		int oldPts = points;
 		points += item.ptModifier;
-		dataHolder.Lives += item.hpModifier;
-		Debug.Log ("item collision - new stats - pts: " + points + ", lifes: " + dataHolder.Lives);
+//		dataHolder.Lives += item.hpModifier;
+		Debug.Log ("item collision - new pts: " + points + " - was: " + oldPts);
 
 		if (item.ptModifier > 0) {
 			collected.Add (item.GetComponent<SpriteRenderer> ().sprite);
@@ -62,16 +61,15 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (item.hpModifier < 0) {
-//			hurtingAnimFrames = 10;
-//			animator.SetTrigger("HurtTrigger");
-			Application.LoadLevel (Application.loadedLevelName);
+			hurtingAnimFrames = hurtingAnimFrameMax;
+			animator.SetTrigger("HurtTrigger");
+			GameObject.FindObjectOfType<LifesHandler> ().OnLifeLost ();
+//			Application.LoadLevel (Application.loadedLevelName);
 		} else if (item.hpModifier > 0) {
 			animator.SetTrigger("DrinkTrigger");
 		}
-		if (dataHolder.Lives < 0) {
+//		if (dataHolder.Lives < 0) {
 			// player dead
-			Debug.Log ("Player dead");
-			Application.LoadLevel ("GameOver");
-		}
+//		}
 	}
 }

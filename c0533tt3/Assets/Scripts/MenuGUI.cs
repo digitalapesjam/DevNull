@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 
 public class MenuGUI : MonoBehaviour {
-	
+
+	public GameObject Background;
 	bool loading = false;
 	void OnGUI () {
 //		Debug.Log ("Doing GUI");

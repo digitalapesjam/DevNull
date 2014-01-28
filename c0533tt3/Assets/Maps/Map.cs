@@ -5,7 +5,6 @@ public class Map : MonoBehaviour {
 
 	public static int numberOfItems=20;
 	public GameObject player;
-	public Sprite city;
 	public Sprite groundBlock;
 	public Sprite Gate;
 	public Sprite WaterBlock;
@@ -15,8 +14,7 @@ public class Map : MonoBehaviour {
 
 	public float LevelLength = 100;
 	public float cityDistance = 0.8f;
-
-	private GameObject farCity;
+	
 	private GameObject floor;
 	private GameObject largeSolidElementsPlaced;
 	private GameObject water;
@@ -65,17 +63,6 @@ public class Map : MonoBehaviour {
 				g.transform.position = new Vector3(i*groundBlock.bounds.size.x-10,-3,0);
 				g.transform.parent = water.transform;
 			}
-		}
-
-		int numberOfCieties = Mathf.CeilToInt(LevelLength/city.bounds.size.x);
-		farCity = new GameObject("farCity");
-		for (int i =0; i<numberOfCieties; i++){
-			GameObject g = new GameObject("city"+i);
-			g.AddComponent<SpriteRenderer>();
-			g.GetComponent<SpriteRenderer>().sprite = city;
-			g.GetComponent<SpriteRenderer>().sortingOrder = -1;
-			g.transform.position = new Vector3(i*city.bounds.size.x-5,-1f,0);
-			g.transform.parent = farCity.transform;
 		}
 
 		int lastElementPos = 10;
@@ -193,6 +180,5 @@ public class Map : MonoBehaviour {
 		Vector3 cameraOffset = Camera.main.transform.position-prevCameraPos;
 		prevCameraPos = Camera.main.transform.position;
 
-		farCity.transform.position = Vector3.Lerp(farCity.transform.position,farCity.transform.position + cameraOffset*0.9f,Time.deltaTime*20);
 	}
 }

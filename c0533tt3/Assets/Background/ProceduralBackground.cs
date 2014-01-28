@@ -8,6 +8,8 @@ public class ProceduralBackground : MonoBehaviour {
 
 	public float ParallaxSpeed = 10;
 
+	public bool ShowCity = true;
+
 	// Use this for initialization
 	void Start () {
 		int height = Screen.height;
@@ -49,6 +51,8 @@ public class ProceduralBackground : MonoBehaviour {
 		map.Apply();
 		
 		renderer.sharedMaterial.SetTexture("_Parallax2",map);
+
+		renderer.sharedMaterial.SetFloat("_CityBrightness",ShowCity ? 1 : 0);
 	}
 	
 	// Update is called once per frame
@@ -63,10 +67,10 @@ public class ProceduralBackground : MonoBehaviour {
 
 		if (Player != null) {
 		float horizontalSpeed = Player.velocity.x*2;
-		float currentRainSpeed = renderer.material.GetFloat("_ParallaxSpeed");
-		renderer.material.SetFloat("_ParallaxSpeed",Mathf.Lerp(currentRainSpeed,horizontalSpeed,Time.deltaTime/10));
+		float currentRainSpeed = renderer.material.GetFloat("_Speed");
+			renderer.material.SetFloat("_Speed",Mathf.Lerp(currentRainSpeed,horizontalSpeed,Time.deltaTime/10));
 		}
 
-		renderer.material.SetFloat("_ParallaxSpeed",ParallaxSpeed);
+		renderer.sharedMaterial.SetFloat("_Speed",ParallaxSpeed);
 	}
 }

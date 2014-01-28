@@ -75,7 +75,7 @@ public class Map : MonoBehaviour {
 
 			int offset = 4 + Mathf.FloorToInt(Random.Range(0,10));
 
-			g.transform.position = new Vector3(floor.transform.GetChild(Mathf.Min (lastElementPos+offset, floor.transform.childCount) ).position.x,-2.6f,0);
+			g.transform.position = new Vector3(floor.transform.GetChild(Mathf.Min (lastElementPos+offset, floor.transform.childCount - 1) ).position.x,-2.6f,0);
 
 
 			g.AddComponent<SpriteRenderer>();

@@ -37,6 +37,9 @@ public class PlayerController : MonoBehaviour {
 		float speed = 0.5f*(MaxSpeed+MinSpeed) + move*0.5f*(MaxSpeed-MinSpeed);
 		rigidbody2D.velocity = new Vector2(speed,rigidbody2D.velocity.y);
 
+		// adjust animation speed depending on player speed
+		animator.speed = speed / MaxSpeed;
+
 		if (!grounded && Input.GetKey(KeyCode.Space) && rigidbody2D.velocity.y > 0){
 			rigidbody2D.AddForce(new Vector2(0,jumpForce*0.06f));
 		}

@@ -59,7 +59,8 @@ public class PlayerController : MonoBehaviour {
 		Debug.Log ("item collision - new pts: " + points + " - was: " + oldPts);
 
 		if (item.ptModifier > 0) {
-			collected.Add ((Texture2D)item.GetComponent<Renderer>().material.mainTexture);
+//			collected.Add ((Texture2D)item.GetComponent<Renderer>().material.mainTexture);
+			collected.Add ((Texture2D)item.GetComponent<MeshRenderer>().materials[0].GetTexture("_Face"));
 			animator.SetTrigger("DrinkTrigger");
 		}
 

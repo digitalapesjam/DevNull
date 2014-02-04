@@ -112,7 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33716d2b116764bf99a748391c90a653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifePic: {fileID: 2800000, guid: 183be9dd915b54cb3aebc4bc5e082456, type: 3}
 --- !u!1001 &214516510
 Prefab:
   m_ObjectHideFlags: 0

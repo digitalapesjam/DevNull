@@ -159,7 +159,8 @@ public class Map : MonoBehaviour {
 
 	void makeItem(int index, Vector2 pt, Texture2D texture, int hpMod, int ptMod) {
 		GameObject g = (GameObject)Instantiate(ItemPrefab);
-		g.GetComponent<MeshRenderer>().materials[0].SetTexture("_Face",texture);
+		g.renderer.material.SetTexture("_Face",texture);
+		g.renderer.material.SetFloat ("_RandomSeed",Random.Range(0,360));
 
 //		Sprite s = Sprite.Create(texture,Rect.MinMaxRect(0,0,texture.width,texture.height),Vector2.one/2,texture.width);
 //		GameObject g = new GameObject("profile_" + index);

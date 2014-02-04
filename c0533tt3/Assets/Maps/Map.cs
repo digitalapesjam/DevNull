@@ -20,7 +20,8 @@ public class Map : MonoBehaviour {
 	private GameObject water;
 	private GameObject items;
 	private Vector3 prevCameraPos;
-	
+
+	public GameObject ItemPrefab;
 
 	// Use this for initialization
 	void Start () {
@@ -157,18 +158,22 @@ public class Map : MonoBehaviour {
 	}
 
 	void makeItem(int index, Vector2 pt, Texture2D texture, int hpMod, int ptMod) {
-		Sprite s = Sprite.Create(texture,Rect.MinMaxRect(0,0,texture.width,texture.height),Vector2.one/2,texture.width);
-		GameObject g = new GameObject("profile_" + index);
-		g.transform.parent = items.transform;
-		g.AddComponent<SpriteRenderer>();
-		g.GetComponent<SpriteRenderer>().sprite = s;
-		g.AddComponent<Rigidbody2D>();
-		g.AddComponent<PolygonCollider2D>();
-		g.GetComponent<Rigidbody2D>().fixedAngle = true;
-		g.GetComponent<SpriteRenderer>().sortingOrder = 1;
+		GameObject g = (GameObject)Instantiate(ItemPrefab);
+		g.GetComponent<MeshRenderer>().materials[0].SetTexture("_Face",texture);
+
+//		Sprite s = Sprite.Create(texture,Rect.MinMaxRect(0,0,texture.width,texture.height),Vector2.one/2,texture.width);
+//		GameObject g = new GameObject("profile_" + index);
+//		g.transform.parent = items.transform;
+//		g.AddComponent<SpriteRenderer>();
+//		g.GetComponent<SpriteRenderer>().sprite = s;
+//		g.AddComponent<Rigidbody2D>();
+//		g.AddComponent<PolygonCollider2D>();
+//		g.GetComponent<Rigidbody2D>().fixedAngle = true;
+//		g.GetComponent<SpriteRenderer>().sortingOrder = 1;
+
 		g.transform.position = new Vector2(pt.x, pt.y + 5);
-		g.transform.localScale = new Vector2(0.6f, 0.6f);
-		g.AddComponent<Item> ();
+//		g.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+//		g.AddComponent<Item> ();
 		Item item = g.GetComponent<Item> ();
 		item.Player = player;
 		item.hpModifier = hpMod;

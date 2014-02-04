@@ -8,6 +8,8 @@ public class GetPhotos : MonoBehaviour {
 
 	public GameObject notifier;
 
+	public Texture2D[] testPhotos;
+
 	private int ImageCount = 30;
 	private bool isTest = false;
 
@@ -24,13 +26,19 @@ console.log('sending urls to Unity', window.fbf_urls);
 u.getUnity().SendMessage('FBHandler', 'AddFriends', window.fbf_urls);
 ");
 		} else {
-			ImageCount = 5;
 			isTest = true;
-			AddFriend ("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash1/t5/275330_609928551_792317627_q.jpg");
-			AddFriend ("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/273836_601768550_1429033367_q.jpg");
-			AddFriend ("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/48895_595715443_4117_q.jpg");
-			AddFriend ("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/t5/41657_583738753_8955_q.jpg");
-			AddFriend ("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash1/t5/371129_577322690_159507207_q.jpg");
+
+			for(int i = 0; i < ImageCount; i++) {
+				photos.Add (testPhotos[i % testPhotos.Length]);
+			}
+
+			notifier.SendMessage("FBPicsLoaded", photos);
+
+//			AddFriend ("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash1/t5/275330_609928551_792317627_q.jpg");
+//			AddFriend ("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/273836_601768550_1429033367_q.jpg");
+//			AddFriend ("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/48895_595715443_4117_q.jpg");
+//			AddFriend ("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/t5/41657_583738753_8955_q.jpg");
+//			AddFriend ("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash1/t5/371129_577322690_159507207_q.jpg");
 		}
 	}
 

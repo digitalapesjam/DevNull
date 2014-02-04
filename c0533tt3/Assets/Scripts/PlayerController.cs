@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour {
 	Animator animator;
 
 	public static int points = 0;
-	public static List<Sprite> collected = new List<Sprite>();
+	public static List<Texture2D> collected = new List<Texture2D>();
 
 	// Use this for initialization
 	void Start () {
@@ -59,7 +59,8 @@ public class PlayerController : MonoBehaviour {
 		Debug.Log ("item collision - new pts: " + points + " - was: " + oldPts);
 
 		if (item.ptModifier > 0) {
-			collected.Add (item.GetComponent<SpriteRenderer> ().sprite);
+//			collected.Add ((Texture2D)item.GetComponent<Renderer>().material.mainTexture);
+			collected.Add ((Texture2D)item.GetComponent<MeshRenderer>().materials[0].GetTexture("_Face"));
 			animator.SetTrigger("DrinkTrigger");
 		}
 

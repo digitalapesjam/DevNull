@@ -8,3 +8,5 @@ YOU have been targeted by network terrorists, for unknown reason. What matters n
 
 Collect your friends, but avoid the strangers!
 
+Try it at http://digitalapesjam.github.io/DevNull/
+
